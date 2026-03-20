@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCAN USDT - MetaMask</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            background: #1e293b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        h1 { color: #38bdf8; margin-bottom: 10px; }
+        p { color: #94a3b8; margin-bottom: 30px; }
+        .btn-connect {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-connect:hover { background-color: #0ea5e9; }
+        #status { margin-top: 20px; font-weight: bold; color: #10b981; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SCAN USDT</h1>
+        <p>قم بربط محفظتك لبدء عملية المسح</p>
+        <button class="btn-connect" onclick="connectWallet()">ربط محفظة MetaMask</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        async function connectWallet() {
+            const status = document.getElementById('status');
+            
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    status.innerText = "جاري الاتصال...";
+                    // طلب الاتصال بالمحفظة
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const account = accounts[0];
+                    status.innerText = "تم الاتصال بـ: " + account.substring(0, 6) + "..." + account.substring(38);
+                    alert("ممتاز! المحفظة متصلة الآن.");
+                } catch (error) {
+                    console.error(error);
+                    status.innerText = "فشل الاتصال بالمحفظة.";
+                }
+            } else {
+                alert("الرجاء فتح هذه الصفحة داخل متصفح MetaMask أو تثبيت الإضافة.");
+                status.innerText = "MetaMask غير مثبت.";
+            }
+        }
+    </script>
+
+</body>
+</html>
+</>
