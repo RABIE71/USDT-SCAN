@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,68 +8,34 @@
         body {
             background-color: #007bff; /* اللون الأزرق */
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
         }
 
+        /* تنسيق الزرار العصري */
         .connect-button {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            /* تكبير الحجم */
-            padding: 18px 36px;
-            font-size: 20px;
-            font-weight: bold;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            /* حجم متوسط ومتناسق */
+            padding: 10px 22px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             color: #000;
-            background-color: #ffc107; /* لون ذهبي */
-            border: none;
-            border-radius: 12px;
+            background-color: #ffc107; /* اللون الذهبي */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px; /* حواف دائرية عصرية */
             cursor: pointer;
-            box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            outline: none;
+            z-index: 1000;
         }
 
         .connect-button:hover {
             background-color: #ffca2c;
-            transform: scale(1.05); /* كيكبر شوية ملي كدوز عليه */
-        }
-
-        .connect-button:active {
-            transform: scale(0.95);
-        }
-    </style>
-</head>
-<body>
-
-    <button class="connect-button" id="connectWallet">Connect Wallet</button>
-
-    <script>
-        const connectButton = document.getElementById('connectWallet');
-
-        connectButton.addEventListener('click', async () => {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    // طلب الاتصال بالمحفظة
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const account = accounts[0];
-                    connectButton.innerText = "Connected: " + account.substring(0, 6) + "..." + account.substring(account.length - 4);
-                    connectButton.style.backgroundColor = "#28a745"; // كيتغير للأخضر ملي كيتكونكتا
-                    connectButton.style.color = "#fff";
-                    console.log("Connected to account:", account);
-                } catch (error) {
-                    console.error("User rejected the request", error);
-                    alert("رفضتِ الاتصال بالمحفظة!");
-                }
-            } else {
-                // إذا لم يكن MetaMask مثبتاً
-                alert("المرجو تثبيت MetaMask أولاً!");
-                window.open('https://metamask.io/download/', '_blank');
-            }
-        });
-    </script>
-
-</body>
-</html>
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,
+                                        
